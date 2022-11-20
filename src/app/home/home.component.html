@@ -1,0 +1,29 @@
+<section class="home">
+  <img
+    src="assets/img/employeeManagement2.png"
+    alt="Employee Management"
+  />
+
+  <div class="homecontent">
+    <h1>Employee Management System</h1>
+    <div *ngIf="loggedIn()">
+      <h2>Hi {{ loginUserName }}!</h2>
+    </div>
+    <div *ngIf="!loggedIn()">
+      <a [routerLink]="['/login']" (click)="loginButtonService()" class="btn btn-lg btn-light"
+        >Login</a
+      >
+      &nbsp;
+      <a [routerLink]="['/login']" (click)="signupButtonService()" class="btn btn-lg btn-primary">SignUp</a>
+    </div>
+    <div>
+      <button
+        *ngIf="loggedIn()"
+        [routerLink]="['/employeelist']"
+        class="btn btn-lg btn-primary"
+      >
+        Let's Start
+      </button>
+    </div>
+  </div>
+</section>

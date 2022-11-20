@@ -1,0 +1,82 @@
+<body>
+  <div class="addeditbox">
+    <div class="container">
+      <mat-card class="mat-elevation-z12 inputbox">
+        <form class="center" [formGroup]="employeeForm">
+          <!-- <mat-form-field class="example-full-width">
+            <mat-label>Employee ID </mat-label>
+            <input matInput formControlName="employee_id" name="employee_id" />
+          </mat-form-field> -->
+          <br />
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Employee Name </mat-label>
+            <input
+              matInput
+              formControlName="employee_name"
+              name="employee_name"
+            />
+          </mat-form-field>
+          <br />
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              matInput
+              formControlName="email_id"
+              [errorStateMatcher]="matcher"
+              placeholder="Ex. pat@example.com"
+              email="true"
+            />
+            <mat-hint>Your Email ID</mat-hint>
+            <mat-error
+              *ngIf="
+                email_id.hasError('email') && !email_id.hasError('required')
+              "
+            >
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="email_id.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <br />
+          <!-- <label>Department </label>
+        <input type="text" formControlName="department" /> -->
+          <mat-form-field class="example-full-width">
+            <mat-label>Department </mat-label>
+            <input matInput formControlName="department" name="department" />
+          </mat-form-field>
+          <br />
+
+          <!-- <label>Designation </label>
+          <input type="text" formControlName="designation" /> -->
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Designation </mat-label>
+            <input matInput formControlName="designation" name="designation" />
+          </mat-form-field>
+
+          <br />
+          <br />
+          <button
+            [disabled]="!employeeForm.valid"
+            mat-raised-button
+            color="primary"
+            style="margin-right: 30px"
+            (click)="addEditForm()"
+          >
+            Submit
+          </button>
+
+          <button (click)="goBackEmployeeList()" mat-raised-button>Back</button>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+
+
+</body>
+

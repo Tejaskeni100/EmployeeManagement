@@ -1,0 +1,114 @@
+<!-- <html>
+  <body>
+    <div id="navbar">
+
+      <header class="site-header">
+        <div class="site-identity">
+        <h1>Employee Management</h1>
+      </div>
+      <nav
+      class="site-navigation"
+      (scroll)="onscroll()"
+      [ngClass]="navbarfixed ? 'fixed' : 'nofixed'"
+      >
+      <ul class="nav">
+        <li><a [routerLink]="['/employeelist']">Employee List</a></li>
+        <li><a [routerLink]="['/addemployee']">Add Employee</a></li>
+        <li *ngIf="!loggedIn()"><a href="#">Login</a></li>
+        <li *ngIf="loggedIn()">
+          <span>Welcome {{ loginUserName }} </span> |
+          <a class="submit" type="submit" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</div>
+  
+  </body>
+</html> -->
+<!-- fixed-top -->
+
+<nav
+  id="navbar_top"
+  class="navbar navbar-expand-lg navbar-light"
+  (scroll)="onscroll()"
+  [ngClass]="navbarfixed ? 'fixed-top' : ''"
+>
+  <a class="navbar-brand bg-transparent text-white" [routerLink]="['/home']"
+    >Employee Management</a
+  >
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a
+          [routerLink]="['/home']"
+          class="nav-link text-white"
+          style="font-size: 16px"
+          >Home
+        </a>
+      </li>
+      <li *ngIf="loggedIn()" class="nav-item active">
+        <a
+          [routerLink]="['/employeelist']"
+          class="nav-link text-white"
+          style="font-size: 16px"
+          >Employee List</a
+        >
+      </li>
+      <li *ngIf="loggedIn()" class="nav-item active">
+        <a
+          [routerLink]="['/addemployee']"
+          class="nav-link text-white"
+          style="font-size: 16px"
+          >Add Employee</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="!loggedIn()">
+        <a
+          (click)="loginButtonService()"
+          class="nav-link text-white"
+          [routerLink]="['/login']"
+          style="font-size: 16px"
+          >LogIn</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="loggedIn()">
+        <a
+          (click)="logout()"
+          class="nav-link text-white"
+          style="font-size: 16px"
+          >Welcome {{ loginUserName }} | Logout</a
+        >
+      </li>
+
+      <li class="nav-item" *ngIf="!loggedIn()">
+        <a
+          (click)="signupButtonService()"
+          [routerLink]="['/login']"
+          class="nav-link text-white"
+          style="font-size: 16px"
+          >SignUp</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div>
+    <mat-slide-toggle id="toggle" style="color: white"
+      >Dark Mode?</mat-slide-toggle
+    >
+  </div>
+</nav>
+
+<script src="../../assets/js/navbar.js"></script>
