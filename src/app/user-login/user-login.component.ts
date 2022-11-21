@@ -81,7 +81,7 @@ export class UserLoginComponent implements OnInit {
 
 
   tabClick(tab: any) {
-    console.log(tab);
+    // console.log(tab);
   }
 
   createUser() {
@@ -92,7 +92,7 @@ export class UserLoginComponent implements OnInit {
       password: this.loginForm.controls['password'].value,
     };
     this.userService.addUser(this.user).subscribe((data: any)=> {
-      console.log(data);
+      // console.log(data);
       Swal.fire({
         title: 'User is Added!',
         icon: 'success',
@@ -117,7 +117,7 @@ export class UserLoginComponent implements OnInit {
     };
     this.userService.loginUser(this.user).subscribe(
       (data: any) => {
-        console.log(data); 
+        // console.log(data); 
         if(data.message == "Password Incorrect!"){
           Swal.fire({
             icon: 'warning',
@@ -183,13 +183,13 @@ export class UserLoginComponent implements OnInit {
     this.user = {
       email_id: this.loginForm.controls['email_id'].value
     };
-    console.log(this.user)
+    // console.log(this.user)
     this.userService.forgotPassword(this.user).subscribe((data: any) => {
-      console.log(data.affectedRows)
+      // console.log(data.affectedRows)
       if(data.affectedRows == 1){
         this.otpStatus = true;
         this.loginForm.get('email_id')?.disable();
-        console.log("Otp Send!")
+        // console.log("Otp Send!")
         Swal.fire({
           title: 'Otp Send to your registerd Email ID!',
           icon: 'success',
@@ -212,7 +212,7 @@ export class UserLoginComponent implements OnInit {
       otp: this.loginForm.controls['otp'].value,
       password: this.loginForm.controls['password'].value
     }
-    console.log(this.user)
+    // console.log(this.user)
 
     this.userService.updatePassword(this.user).subscribe(
       (data: any) => {
@@ -223,7 +223,7 @@ export class UserLoginComponent implements OnInit {
           showConfirmButton: false,
           timer: 1700
         });
-        console.log(data);
+        // console.log(data);
         this.loginForm.get('email_id')?.enable();
         this.loginForm.reset();
         this.hide = false;
@@ -234,7 +234,7 @@ export class UserLoginComponent implements OnInit {
 // Remembered Me!
 
   rememberedMe(){
-    console.log(localStorage.getItem('rememberdme'));
+    // console.log(localStorage.getItem('rememberdme'));
     return localStorage.getItem('rememberdme');
   }
 

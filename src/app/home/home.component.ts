@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedService.currentMessage.subscribe(data => {
-      console.log(data);
+      // console.log(data);
     })
     
   }

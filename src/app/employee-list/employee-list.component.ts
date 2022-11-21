@@ -49,7 +49,7 @@ export class EmployeeListComponent implements OnInit {
 
 
   getRow(row: any) {
-    console.log(row);
+    // console.log(row);
   }
 
   filterChange(event: Event){
@@ -81,9 +81,9 @@ export class EmployeeListComponent implements OnInit {
    }
 
    deleteProduct(eid?: string): void {
-    console.log(eid)
+    // console.log(eid)
     this.employeeService.deleteEmployee(eid).subscribe((data) => {
-      console.log("Deleted")
+      // console.log("Deleted")
     })
   
    }

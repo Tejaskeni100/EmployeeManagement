@@ -17,7 +17,7 @@ export class AppComponent {
   }
   ngOnInit(){
     this.route.fragment.subscribe((data) =>{
-      console.log(data);
+      // console.log(data);
     })
     this.initializeTheme();
   }
