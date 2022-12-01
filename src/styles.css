@@ -1,19 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
-html, body { 
-    height: 100%; 
-    scroll-behavior: smooth;
+html,
+body {
+  height: 100%;
+  scroll-behavior: smooth;
 }
-body { 
-    margin: 0; 
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
 
 .dark-theme {
-     --primary-color: #000106;
-     --secondary-color: #fff;
+  --primary-color: #000106;
+  --secondary-color: #fff;
+}
+
+body.dark-mode {
+  background-color: #2d3436;
+  color: #dfe6e9;
+}
+
+body.light-mode {
+  background-color: #dfe6e9;
+  color: #2d3436;
 }

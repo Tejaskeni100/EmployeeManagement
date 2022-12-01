@@ -12,8 +12,8 @@ export class EmployeeServiceService {
   }
   // apiServer = "http://localhost:5000/employee"
   // apiServer = 'http://172.21.102.17:5000/employee';
-  apiServer = "https://backend-tejaskeni100.onrender.com/employee";
-  
+  apiServer = 'https://backend-tejaskeni100.onrender.com/employee';
+
   constructor(private httpClient: HttpClient) {}
 
   getEmployees(): Observable<Employee[]> {
@@ -48,6 +48,13 @@ export class EmployeeServiceService {
       .get<Employee>(this.apiServer + `/getemployee/${id}`)
       .pipe(catchError(this.errorHandler));
   }
+
+  getConnection(): Observable<any> {
+    return this.httpClient.get<any>("https://backend-tejaskeni100.onrender.com").pipe(
+     catchError(this.errorHandler)
+    )
+  
+    }
 
   errorHandler(error: any) {
     let errorMessage = '';

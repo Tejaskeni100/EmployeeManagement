@@ -9,28 +9,44 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTableModule} from '@angular/material/table';
-import {MatSortModule} from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { TokenInterceptorService } from './services/token/token-interceptor.service';
 import { LoginGuardGuard } from './guard/login-guard/login-guard.guard';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { LoaderComponent } from './loader/loader.component';
 
-
+import {
+  NgxUiLoaderModule,
+  NgxUiLoaderRouterModule,
+  NgxUiLoaderHttpModule,
+  POSITION,
+  NgxUiLoaderConfig
+} from 'ngx-ui-loader';
+import { DarkModeComponent } from './dark-mode/dark-mode.component';
 // import {Md5} from 'ts-md5/dist/md5';
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  bgsColor: "#00ACC1",
+  bgsPosition: POSITION.centerCenter,
+  bgsSize: 60,
+  "hasProgressBar": false,
+
+};
 
 @NgModule({
   declarations: [
@@ -41,7 +57,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     NavbarComponent,
     FooterComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    LoaderComponent,
+    DarkModeComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,9 +79,19 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatCheckboxModule,
     FormsModule,
     MatIconModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgxUiLoaderHttpModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderRouterModule,
   ],
-  providers: [LoginGuardGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
-  bootstrap: [AppComponent]
+  providers: [
+    LoginGuardGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,7 +1,15 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, HostListener, Renderer2, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  Renderer2,
+  Inject,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import Swal from 'sweetalert2/src/sweetalert2.js'
+import { DarkModeService } from 'angular-dark-mode';
+import { Observable } from 'rxjs';
+import Swal from 'sweetalert2/src/sweetalert2.js';
 import { SharedServiceService } from '../services/shared-service/shared-service.service';
 
 declare const navbar: any;
@@ -9,52 +17,73 @@ declare const navbar: any;
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  loginUserName: any
+  loginUserName: any;
   navbarfixed: boolean = false;
 
+  darkMode$: Observable<boolean> = this.darkModeService.darkMode$;
+  message: string = "Light Mode!";
 
-  @HostListener('window:scroll',['$event']) onscroll(){
-    if(window.scrollY > 100){
+  @HostListener('window:scroll', ['$event']) onscroll() {
+    if (window.scrollY > 100) {
       this.navbarfixed = true;
-    }else {
+    } else {
       this.navbarfixed = false;
     }
   }
-  myFun(){
+  myFun() {
     navbar();
   }
 
-  constructor(private router: Router, private route: ActivatedRoute, private sharedService: SharedServiceService, @Inject(DOCUMENT) private document: Document,
-  private renderer : Renderer2) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private sharedService: SharedServiceService,
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
+    private darkModeService: DarkModeService
+  ) {
     // this.myFun();
-   }
+  }
 
   ngOnInit(): void {
     this.loginUserName = sessionStorage.getItem('loginusername');
     // console.log(this.loggedIn());
-    this.route.fragment.subscribe((data) =>{
-      // console.log(data); 
-      this.jumpTo(data)
-    })
+    this.route.fragment.subscribe((data) => {
+      // console.log(data);
+      this.jumpTo(data);
+    });
+    // this.displayMessage(this.message)
+  }
+  
+  onToggle(): void {
+    // console.log(event);
+    console.log('Calling Toggle');
+    this.darkModeService.toggle();
 
   }
 
-  loggedIn(){
-    // this.loginUserName = sessionStorage.getItem('loginusername'); 
+  displayMessage(e: any) {
+    console.log(e);
+    if (e.checked) this.message = 'Dark Mode!';
+    else this.message = 'Light Mode!';
+  }
+
+  loggedIn() {
+    // this.loginUserName = sessionStorage.getItem('loginusername');
     this.loginUserName = localStorage.getItem('rememberdme');
-        // this.loginUserName = sessionStorage.getItem('token'); 
+    // this.loginUserName = sessionStorage.getItem('token');
     // return sessionStorage.getItem('loginDetails')
     return this.loginUserName;
   }
 
-  loginButtonService(){
+  loginButtonService() {
     this.sharedService.changeMessage(0);
   }
 
-  signupButtonService(){
+  signupButtonService() {
     this.sharedService.changeMessage(1);
   }
 
@@ -62,17 +91,17 @@ export class NavbarComponent implements OnInit {
   //   let confirmMsg = window.confirm("Are you sure want to logout?")
   //   if(confirmMsg == true){
   //     sessionStorage.clear();
-      
+
   //     this.router.navigate(['/login']);
   //   }
   // }
 
-  jumpTo(section: any){
+  jumpTo(section: any) {
     setTimeout(() => {
-      document.getElementById(section)?.scrollIntoView({behavior: 'smooth'})
-    }, 1000)
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+    }, 1000);
   }
-  
+
   // toggleMode() {
   //   this.document.body.classList.toggle(Mode.LIGHT);
   //   this.document.body.classList.toggle(Mode.DARK);
@@ -83,35 +112,30 @@ export class NavbarComponent implements OnInit {
   //   }
   // }
 
-  logout(){
+  logout() {
     Swal.fire({
       title: 'Are you sure?',
-      text: "Once logout you need to login again!",
+      text: 'Once logout you need to login again!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Logout'
+      confirmButtonText: 'Logout',
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           icon: 'success',
           title: 'Logout Successfully!',
           showConfirmButton: false,
-          timer: 1500
-
-        }
-          )
-          sessionStorage.clear();
-          localStorage.clear();
-          this.router.navigate(['home']);
-        }
-      })
-    }
-
-   
-    }
-    // function HostListner(arg0: string, arg1: string[]) {
-      //   throw new Error('Function not implemented.');
-      // }
-      
+          timer: 1500,
+        });
+        sessionStorage.clear();
+        localStorage.clear();
+        this.router.navigate(['home']);
+      }
+    });
+  }
+}
+// function HostListner(arg0: string, arg1: string[]) {
+//   throw new Error('Function not implemented.');
+// }

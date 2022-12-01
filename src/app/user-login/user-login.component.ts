@@ -115,9 +115,10 @@ export class UserLoginComponent implements OnInit {
       email_id: this.loginForm.controls['email_id'].value,
       password: this.loginForm.controls['password'].value
     };
+    console.log(this.user);
     this.userService.loginUser(this.user).subscribe(
       (data: any) => {
-        // console.log(data); 
+        console.log(data); 
         if(data.message == "Password Incorrect!"){
           Swal.fire({
             icon: 'warning',
@@ -234,7 +235,7 @@ export class UserLoginComponent implements OnInit {
 // Remembered Me!
 
   rememberedMe(){
-    // console.log(localStorage.getItem('rememberdme'));
+    console.log(localStorage.getItem('rememberdme'));
     return localStorage.getItem('rememberdme');
   }
 

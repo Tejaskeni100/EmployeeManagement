@@ -1,4 +1,7 @@
 <!-- <mat-card> -->
+<div *ngIf="showLoader$ | async as showLoader ">
+  <app-loader *ngIf="showLoader"></app-loader>
+</div>
 
 <div class="listcomponent mat-elevation-z12">
   <!-- <div class="container"> -->

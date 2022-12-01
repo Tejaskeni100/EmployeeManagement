@@ -105,10 +105,26 @@
     </ul>
   </div>
   <div>
-    <mat-slide-toggle id="toggle" style="color: white"
-      >Dark Mode?</mat-slide-toggle
-    >
+    <span class="material-icons" style="margin-top: 5px">wb_sunny</span>
+    <mat-slide-toggle [checked]="darkMode$ | async" (change)="onToggle()">
+    </mat-slide-toggle>
+    <span class="material-icons">dark_mode</span>
   </div>
 </nav>
+<!-- <div>
+  <mat-slide-toggle
+    [checked]="darkMode$ | async"
+    (change)="onToggle(); displayMessage($event)"
+    [checked]="false"
+  >
+    {{darkMode$ | async}}
+  </mat-slide-toggle>
+</div> -->
+
+<!-- <input
+    type="checkbox"
+    [checked]="darkMode$ | async"
+    (change)="onToggle()"
+  /> -->
 
 <script src="../../assets/js/navbar.js"></script>
